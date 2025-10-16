@@ -676,28 +676,41 @@ class D3QNPERAgent:
     
     def save_model(self):
         """
-        モデルの重みを安全に保存（バックアップ付き）
+        モデルの重みを保存（Windows対応）
         """
         import shutil
+        import uuid
         
         backup_path = self.model_path.replace('.h5', '_backup.h5')
         
-        # 既存のモデルをバックアップ
-        if os.path.exists(self.model_path):
-            shutil.copy2(self.model_path, backup_path)
-        
-        # 一時ファイルに保存してから置き換え
         try:
-            temp_path = self.model_path + '.tmp'
+            # 既存のモデルをバックアップ（存在する場合のみ）
+            if os.path.exists(self.model_path):
+                shutil.copy2(self.model_path, backup_path)
+            
+            # h5拡張子を持つ一時ファイル名を使用
+            # ランダムなIDを付けて衝突を防ぐ
+            temp_path = self.model_path.replace('.h5', f'_temp_{uuid.uuid4().hex[:8]}.h5')
+            
+            # 一時ファイルに保存
             self.model.save_weights(temp_path)
-            os.replace(temp_path, self.model_path)
-            print(f"Model saved to {self.model_path}")
-        except Exception as e:
-            print(f"Model save failed: {e}")
-            # バックアップから復元
-            if os.path.exists(backup_path):
-                shutil.copy2(backup_path, self.model_path)
-                print("Restored model from backup")
+            
+            # 保存が成功したことを確認
+            if not os.path.exists(temp_path):
+                raise FileNotFoundError(f"一時ファイルの作成に失敗: {temp_path}")
+            
+            # 本ファイルに置き換え（Windows）
+            if os.path.exists(self.model_path):
+                os.remove(self.model_path)  # 既存ファイルを先に削除
+            
+            os.rename(temp_path, self.model_path)
+            
+            # 最終確認
+            if os.path.exists(self.model_path):
+                file_size = os.path.getsize(self.model_path) / (1024 * 1024)
+                print(f" Model saved to {self.model_path} ({file_size:.2f} MB)")
+            else:
+                raise FileNotFoundError("保存後にファイルが見つかりません")
 
     def save_checkpoint(self, episode, total_steps):
         """
@@ -1125,4 +1138,5 @@ if __name__ == '__main__':
 
         print(f"\nプレイ終了! 最終スコア: {env.score}")
         time.sleep(3)
+
         env.close()
