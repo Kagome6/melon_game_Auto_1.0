@@ -153,6 +153,8 @@ PHYSICS_ACCELERATION = 24  # For faster training
 
 1. Resolve freezing issues, speed up training mode, and add a conditional branch to select a rendering OFF mode.
 2. Lightweight state representation: Speed up by reducing the grid resolution.
+3. Advanced mathematics will be applied to the evaluation of the board state.
+4. the AI ​​will be retrained to improve the accuracy of the robotic arm's movements and to adapt to the new rules.
 
 ---
 
