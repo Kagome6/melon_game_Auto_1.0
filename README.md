@@ -16,7 +16,7 @@ It includes a "Training Mode" and a "Play Mode".
 ### Fruit Evolution Order
 ```
 Cherry → Strawberry → Grape → Hassaku Orange → Orange
-→ Apple → Pear → Peach → Pineapple → Melon → Watermelon
+→ Apple → Pear → Peach → Pineapple → Melon → Bigmelon
 ```
 
 ### Balance Design
