@@ -1,7 +1,5 @@
 # melon_game_Auto_1.0
-
-
-# Fully Automated Melon Game
+# Fully Automated Melon Game (RL6.py)
 
 ## Features and Structure of These Scripts
 
