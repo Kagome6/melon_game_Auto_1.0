@@ -158,7 +158,9 @@ PHYSICS_ACCELERATION = 24  # For faster training
 
 ---
 
-## License
+## Copyright, Licenses and Intellectual Property Rights
+The puzzle game framework (Melon Game) included in this service is an original program adopting general "falling block puzzle" mechanics. It is not an official application of any existing product and has no affiliation whatsoever with any famous game titles.
+All assets, including images, audio, code, and the underlying AI, have been originally created or utilize royalty-free materials, with no intention of infringing upon any copyrights.
 This project is open source. However, since similar game systems and designs have existed in the past, please use it only as an experimental example of reinforcement learning.
 
 ---
@@ -166,8 +168,9 @@ This project is open source. However, since similar game systems and designs hav
 ## Acknowledgements
 
 - Box2D: Physics engine (C++)
-- TensorFlow/Keras: Deep learning framework (Google)
+- TensorFlow/Keras: Deep learning framework
 - Pygame: Graphics library
+"TensorFlow" is a registered trademark of Google LLC.
 
 ---
 
